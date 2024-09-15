@@ -1,9 +1,4 @@
-use std::collections::HashMap;
-
-use reqwest::{Response, StatusCode};
-
-use crate::api::login;
-use crate::model;
+use crate::service;
 
 pub enum CurrentScreen {
     Splash,
@@ -26,21 +21,15 @@ impl App {
     }
 
     pub async fn send_captcha(&mut self) -> Result<bool, Box<dyn std::error::Error>> {
-        let r: Response = reqwest::get(login::get_captcha_endpoint(&self.phone)).await?;
-        if r.status() == StatusCode::OK {
-            Ok(true)
-        } else {
-            Ok(false)
-        }
+        let r: bool = service::send_captcha(&self.phone).await?;
+
+        Ok(r)
     }
 
     pub async fn login(&mut self) -> Result<(), Box<dyn std::error::Error>> {
-        let res = reqwest::get(login::get_login_endpoint(&self.phone, &self.captcha))
-            .await?
-            .json::<model::person_info::PersonInfo>()
-            .await?;
+        let cookie: String = service::get_cookie(&self.phone, &self.captcha).await?;
 
-        self.cookie = res.cookie;
+        self.cookie = cookie;
 
         Ok(())
     }
