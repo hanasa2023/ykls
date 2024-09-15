@@ -38,7 +38,7 @@ pub struct Account {
     pub viptype_version: u64,
     #[serde(rename = "anonimousUser")]
     pub anonimous_user: bool,
-    pub uninitalized: bool,
+    pub uninitialized: bool,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -74,7 +74,7 @@ pub struct Profile {
     pub mutual: bool,
     #[serde(rename = "remarkName")]
     pub remark_name: Option<String>,
-    pub follwed: bool,
+    pub followed: bool,
     #[serde(rename = "backgroundUrl")]
     pub background_url: String,
     #[serde(rename = "avatarImgIdStr")]
@@ -87,18 +87,18 @@ pub struct Profile {
     pub signature: String,
     pub authority: u8,
     pub followeds: u32,
-    #[serde(rename = "eventCound")]
+    #[serde(rename = "eventCount")]
     pub event_count: u32,
     #[serde(rename = "avatarDetail")]
     pub avatar_detail: Option<String>,
-    #[serde(rename = "playlistCound")]
+    #[serde(rename = "playlistCount")]
     pub playlist_count: u32,
-    #[serde(rename = "playlstBeSubscribedCount")]
+    #[serde(rename = "playlistBeSubscribedCount")]
     pub playlst_be_subscribed_count: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct Experts;
+pub struct Experts {}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Binding {
